@@ -1,12 +1,37 @@
 {
-  "updated": "2026-11-05T17:30:00Z",
+  "updated": "2026-11-05T17:46:59Z",
   "items": [
-    {"id": "va-a1", "type": "assignment", "course": "برمجة مرئية", "title": "مستحق Assignment 1", "due": "2026-11-11T21:56:00Z", "url": ""},
-    {"id": "adb-essay", "type": "assignment", "course": "أنظمة قواعد البيانات المتقدمة", "title": "Short Essay", "due": "2026-12-10T09:17:00Z", "url": ""},
-    {"id": "adb-a2", "type": "assignment", "course": "أنظمة قواعد البيانات المتقدمة", "title": "Assignment 2: Case Study", "due": "2026-12-15T10:23:00Z", "url": ""},
-    {"id": "adb-q1", "type": "exam", "course": "أنظمة قواعد البيانات المتقدمة", "title": "Quiz : Distributed Database Management Systems", "due": "2026-11-13T21:15:00Z", "url": ""},
-    {"id": "adb-mid", "type": "exam", "course": "أنظمة قواعد البيانات المتقدمة", "title": "Midterm Exam", "due": "2026-11-20T05:48:00Z", "url": ""},
-    {"id": "adb-q2", "type": "exam", "course": "أنظمة قواعد البيانات المتقدمة", "title": "Graded Quiz: Big Data and NoSQL", "due": "2026-12-02T21:15:00Z", "url": ""},
-    {"id": "example-4", "type": "exam", "course": "مثال", "title": "امتحان رابع (عدّله أو احذفه)", "due": "2026-12-20T08:00:00Z", "url": ""}
+    {
+      "id": "35880@moodle.alaqsa.edu.ps",
+      "type": "assignment",
+      "course": "برمجة مرئية_176",
+      "title": "‏‏‏‏Assignment 1 مستحق",
+      "due": "2026-11-11T21:56:00Z",
+      "url": ""
+    },
+    {
+      "id": "36541@moodle.alaqsa.edu.ps",
+      "type": "exam",
+      "course": "تراكيب البيانات وتحليل الخوارزميات_176",
+      "title": "امتحان قصير مستحق",
+      "due": "2026-11-11T22:00:00Z",
+      "url": ""
+    },
+    {
+      "id": "33668@moodle.alaqsa.edu.ps",
+      "type": "assignment",
+      "course": "أنظمة قواعد البيانات المتقدمة_176",
+      "title": "Short Essay يُغلق",
+      "due": "2026-12-10T09:17:00Z",
+      "url": ""
+    },
+    {
+      "id": "33663@moodle.alaqsa.edu.ps",
+      "type": "assignment",
+      "course": "أنظمة قواعد البيانات المتقدمة_176",
+      "title": "Assignment 2: Case Study مستحق",
+      "due": "2026-12-15T10:23:00Z",
+      "url": ""
+    }
   ]
 }
