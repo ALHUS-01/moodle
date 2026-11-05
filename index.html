@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moodle Dashboard</title>
+<style>
+  :root{
+    --bg:#0b1220; --card:#131c31; --card-border:#1e2a47; --text:#e6ebf5; --muted:#8b97b3;
+    --blue:#3b82f6; --green:#10b981; --red:#ef4444; --amber:#f59e0b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}
+  .wrap{max-width:1380px;margin:0 auto;padding:40px 24px 80px}
+  header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding-bottom:28px;border-bottom:1px solid var(--card-border)}
+  h1{margin:0;font-size:2.4rem;color:var(--blue)}
+  header p{margin:8px 0 0;color:var(--muted)}
+  .sync{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--card-border);padding:10px 18px;border-radius:999px;font-size:.9rem;white-space:nowrap}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+  .dot.stale{background:var(--amber);box-shadow:0 0 8px var(--amber)}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:32px 0}
+  .stat{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:26px 28px;display:flex;justify-content:space-between;align-items:center}
+  .stat small{letter-spacing:.08em;color:var(--muted);font-weight:700}
+  .stat b{display:block;font-size:2.4rem;margin-top:10px}
+  .stat.a b{color:var(--blue)} .stat.e b{color:var(--green)}
+  .stat .ic{font-size:3rem;opacity:.35}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  h2{font-size:1.5rem;margin:0 0 18px;display:flex;align-items:center;gap:10px}
+  .item{background:var(--card);border:1px solid var(--card-border);border-left:4px solid var(--blue);border-radius:12px;padding:18px 20px;margin-bottom:18px;display:flex;align-items:center;gap:16px;transition:.2s}
+  .exams .item{border-left-color:var(--green)}
+  .item.done{opacity:.45}
+  .item.done .title{text-decoration:line-through}
+  .item.urgent .count{color:var(--red);border-color:var(--red)}
+  .check{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--card-border);background:#1a2540;color:var(--text);cursor:pointer;font-size:1rem}
+  .item.done .check{background:var(--green);border-color:var(--green)}
+  .body{flex:1;min-width:0}
+  .tag{display:inline-block;font-size:.75rem;color:#60a5fa;background:#12234a;border:1px solid #1d3a7a;border-radius:6px;padding:3px 10px;margin-bottom:8px}
+  .title{font-weight:700;display:block}
+  .date{color:var(--muted);font-size:.9rem;margin-top:8px;display:block}
+  .count{flex:none;background:#1a2540;border:1px solid var(--card-border);border-radius:8px;padding:10px 16px;font-weight:700}
+  .empty{color:var(--muted);padding:24px;text-align:center;border:1px dashed var(--card-border);border-radius:12px}
+  a.title{color:inherit;text-decoration:none} a.title:hover{color:var(--blue)}
+  @media(max-width:900px){.cols,.stats{grid-template-columns:1fr}header{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1 id="welcome">Welcome back</h1>
+      <p>Here is the automated overview of your deadlines and exams.</p>
+    </div>
+    <div class="sync"><span class="dot" id="dot"></span><span id="syncText">Loading…</span></div>
+  </header>
+
+  <section class="stats">
+    <div class="stat a"><div><small>PENDING ASSIGNMENTS</small><b id="nA">0</b></div><span class="ic">📝</span></div>
+    <div class="stat e"><div><small>UPCOMING EXAMS</small><b id="nE">0</b></div><span class="ic">⚡</span></div>
+  </section>
+
+  <section class="cols">
+    <div><h2>📝 Assignments &amp; Tasks</h2><div id="assignments"></div></div>
+    <div class="exams"><h2>⚡ Quizzes &amp; Exams</h2><div id="exams"></div></div>
+  </section>
+</div>
+
+<script>
+const USER_NAME = "ALHUS";               // غيّر الاسم هنا
+const STALE_HOURS = 12;                  // إذا آخر مزامنة أقدم من هيك يصير النقطة برتقالية
+
+const $ = id => document.getElementById(id);
+const doneKey = "done-items";
+let done = new Set();
+try { done = new Set(JSON.parse(localStorage.getItem(doneKey) || "[]")); } catch(e){}
+const saveDone = () => { try { localStorage.setItem(doneKey, JSON.stringify([...done])); } catch(e){} };
+
+$("welcome").textContent = "Welcome back, " + USER_NAME;
+
+function countdown(ms){
+  if (ms <= 0) return "Due";
+  const m = Math.floor(ms/60000), d = Math.floor(m/1440), h = Math.floor((m%1440)/60), mi = m%60;
+  return d > 0 ? `${d}d ${h}h` : `${h}h ${mi}m`;
+}
+const fmt = new Intl.DateTimeFormat("en-US",{weekday:"short",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"});
+const esc = s => String(s ?? "").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function card(it){
+  const left = new Date(it.due) - Date.now();
+  const cls = ["item", done.has(it.id) ? "done" : "", left < 48*3600*1000 ? "urgent" : ""].join(" ");
+  const title = it.url ? `<a class="title" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)}</a>` : `<span class="title">${esc(it.title)}</span>`;
+  return `<div class="${cls}" data-id="${esc(it.id)}">
+    <button class="check" aria-label="done">✓</button>
+    <div class="body">
+      <span class="tag">${esc(it.course)} 📘</span>
+      ${title}
+      <span class="date">📅 ${fmt.format(new Date(it.due))}</span>
+    </div>
+    <div class="count" data-due="${esc(it.due)}">${countdown(left)}</div>
+  </div>`;
+}
+
+function render(items){
+  const now = Date.now();
+  const upcoming = items.filter(i => new Date(i.due) > now).sort((a,b)=>new Date(a.due)-new Date(b.due));
+  const A = upcoming.filter(i => i.type === "assignment");
+  const E = upcoming.filter(i => i.type === "exam");
+  $("assignments").innerHTML = A.length ? A.map(card).join("") : '<div class="empty">No pending assignments 🎉</div>';
+  $("exams").innerHTML = E.length ? E.map(card).join("") : '<div class="empty">No upcoming exams 🎉</div>';
+  $("nA").textContent = A.filter(i=>!done.has(i.id)).length;
+  $("nE").textContent = E.filter(i=>!done.has(i.id)).length;
+}
+
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".check"); if (!btn) return;
+  const el = btn.closest(".item"), id = el.dataset.id;
+  done.has(id) ? done.delete(id) : done.add(id);
+  saveDone(); el.classList.toggle("done");
+  document.dispatchEvent(new Event("recount"));
+});
+
+let ITEMS = [];
+document.addEventListener("recount", () => {
+  const up = ITEMS.filter(i => new Date(i.due) > Date.now() && !done.has(i.id));
+  $("nA").textContent = up.filter(i=>i.type==="assignment").length;
+  $("nE").textContent = up.filter(i=>i.type==="exam").length;
+});
+
+fetch("data.json?_=" + Date.now()).then(r => r.json()).then(data => {
+  ITEMS = data.items || [];
+  render(ITEMS);
+  const upd = data.updated ? new Date(data.updated) : null;
+  if (upd){
+    const hrs = (Date.now() - upd) / 3600000;
+    $("dot").classList.toggle("stale", hrs > STALE_HOURS);
+    $("syncText").textContent = (hrs > STALE_HOURS ? "Sync delayed · " : "Auto-Sync Active · ") + fmt.format(upd);
+  } else { $("syncText").textContent = "Auto-Sync Active"; }
+  setInterval(() => {
+    document.querySelectorAll(".count").forEach(c => c.textContent = countdown(new Date(c.dataset.due) - Date.now()));
+  }, 30000);
+}).catch(() => { $("syncText").textContent = "Failed to load data.json"; $("dot").classList.add("stale"); });
+</script>
+</body>
+</html>
