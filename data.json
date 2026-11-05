@@ -1,35 +1,67 @@
 {
-  "updated": "2026-11-05T17:46:59Z",
+  "updated": "2026-11-05T17:53:19Z",
   "items": [
     {
-      "id": "35880@moodle.alaqsa.edu.ps",
+      "id": "برمجة مرئية_176|‏‏‏‏Assignment 1",
       "type": "assignment",
       "course": "برمجة مرئية_176",
-      "title": "‏‏‏‏Assignment 1 مستحق",
+      "title": "‏‏‏‏Assignment 1",
       "due": "2026-11-11T21:56:00Z",
       "url": ""
     },
     {
-      "id": "36541@moodle.alaqsa.edu.ps",
+      "id": "تراكيب البيانات وتحليل الخوارزميات_176|امتحان قصير",
       "type": "exam",
       "course": "تراكيب البيانات وتحليل الخوارزميات_176",
-      "title": "امتحان قصير مستحق",
+      "title": "امتحان قصير",
       "due": "2026-11-11T22:00:00Z",
       "url": ""
     },
     {
-      "id": "33668@moodle.alaqsa.edu.ps",
+      "id": "أنظمة قواعد البيانات المتقدمة_176|Quiz : Distributed Database Management Systems",
+      "type": "exam",
+      "course": "أنظمة قواعد البيانات المتقدمة_176",
+      "title": "Quiz : Distributed Database Management Systems",
+      "due": "2026-11-13T21:15:00Z",
+      "url": ""
+    },
+    {
+      "id": "أنظمة قواعد البيانات المتقدمة_176|Midterm Exam",
+      "type": "exam",
+      "course": "أنظمة قواعد البيانات المتقدمة_176",
+      "title": "Midterm Exam",
+      "due": "2026-11-20T05:48:00Z",
+      "url": ""
+    },
+    {
+      "id": "أنظمة قواعد البيانات المتقدمة_176|Graded Quiz: Big Data and NoSQL",
+      "type": "exam",
+      "course": "أنظمة قواعد البيانات المتقدمة_176",
+      "title": "Graded Quiz: Big Data and NoSQL",
+      "due": "2026-12-02T21:15:02Z",
+      "url": ""
+    },
+    {
+      "id": "أنظمة قواعد البيانات المتقدمة_176|Short Essay",
       "type": "assignment",
       "course": "أنظمة قواعد البيانات المتقدمة_176",
-      "title": "Short Essay يُغلق",
+      "title": "Short Essay",
       "due": "2026-12-10T09:17:00Z",
       "url": ""
     },
     {
-      "id": "33663@moodle.alaqsa.edu.ps",
+      "id": "أنظمة قواعد البيانات المتقدمة_176|Graded Quiz : Business Intelligence and Data Warehouses",
+      "type": "exam",
+      "course": "أنظمة قواعد البيانات المتقدمة_176",
+      "title": "Graded Quiz : Business Intelligence and Data Warehouses",
+      "due": "2026-12-13T23:53:02Z",
+      "url": ""
+    },
+    {
+      "id": "أنظمة قواعد البيانات المتقدمة_176|Assignment 2: Case Study",
       "type": "assignment",
       "course": "أنظمة قواعد البيانات المتقدمة_176",
-      "title": "Assignment 2: Case Study مستحق",
+      "title": "Assignment 2: Case Study",
       "due": "2026-12-15T10:23:00Z",
       "url": ""
     }
