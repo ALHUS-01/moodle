@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08T09:35:37Z",
+  "updated": "2026-11-08T12:37:32Z",
   "items": [
     {
       "id": "برمجة مرئية_176|‏‏‏‏Assignment 1",
@@ -24,6 +24,14 @@
       "title": "Quiz : Distributed Database Management Systems",
       "due": "2026-11-13T21:15:00Z",
       "url": ""
+    },
+    {
+      "id": "لغة برمجة 2_176|Assignment 1",
+      "type": "assignment",
+      "course": "لغة برمجة 2_176",
+      "title": "Assignment 1",
+      "due": "2026-11-16T21:59:00Z",
+      "url": "https://drive.google.com/file/d/1OPx6d6VGDX-6XudouijoDQP4p6nf-1qn/view?usp=drive"
     },
     {
       "id": "أنظمة قواعد البيانات المتقدمة_176|Midterm Exam",
