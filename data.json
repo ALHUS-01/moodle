@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08T12:37:32Z",
+  "updated": "2026-11-08T19:16:50Z",
   "items": [
     {
       "id": "برمجة مرئية_176|‏‏‏‏Assignment 1",
@@ -32,6 +32,14 @@
       "title": "Assignment 1",
       "due": "2026-11-16T21:59:00Z",
       "url": "https://drive.google.com/file/d/1OPx6d6VGDX-6XudouijoDQP4p6nf-1qn/view?usp=drive"
+    },
+    {
+      "id": "أنظمة قواعد البيانات المتقدمة_176|HW1",
+      "type": "assignment",
+      "course": "أنظمة قواعد البيانات المتقدمة_176",
+      "title": "HW1",
+      "due": "2026-11-17T22:00:00Z",
+      "url": ""
     },
     {
       "id": "أنظمة قواعد البيانات المتقدمة_176|Midterm Exam",
