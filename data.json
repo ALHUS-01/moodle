@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11T04:12:48Z",
+  "updated": "2026-11-11T13:24:55Z",
   "items": [
     {
       "id": "برمجة مرئية_176|‏‏‏‏Assignment 1",
@@ -39,6 +39,14 @@
       "course": "أنظمة قواعد البيانات المتقدمة_176",
       "title": "HW1",
       "due": "2026-11-17T22:00:00Z",
+      "url": ""
+    },
+    {
+      "id": "نظم التشغيل للأنظمة الذكية_176_|Assignment 2: Analyze File Systems, Users, Permissions",
+      "type": "assignment",
+      "course": "نظم التشغيل للأنظمة الذكية_176_",
+      "title": "Assignment 2: Analyze File Systems, Users, Permissions",
+      "due": "2026-11-18T21:59:00Z",
       "url": ""
     },
     {
