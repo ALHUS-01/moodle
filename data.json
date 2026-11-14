@@ -1,14 +1,6 @@
 {
-  "updated": "2026-11-13T21:08:24Z",
+  "updated": "2026-11-14T04:33:52Z",
   "items": [
-    {
-      "id": "أنظمة قواعد البيانات المتقدمة_176|Quiz : Distributed Database Management Systems",
-      "type": "exam",
-      "course": "أنظمة قواعد البيانات المتقدمة_176",
-      "title": "Quiz : Distributed Database Management Systems",
-      "due": "2026-11-13T21:15:00Z",
-      "url": ""
-    },
     {
       "id": "لغة برمجة 2_176|Assignment 1",
       "type": "assignment",
